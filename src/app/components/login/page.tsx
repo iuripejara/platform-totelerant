@@ -1,4 +1,4 @@
-
+"use client"
 
 export default function Login() {
     return(
@@ -29,7 +29,8 @@ export default function Login() {
                             </div>
                             <button 
                                 type="button"
-                                className=" w-full bg-blue-600 text-zinc-100 font-bold py-3 roud "
+                                    className=" w-full bg-blue-600 text-zinc-100 font-bold py-3 roud "
+                                    onClick={()=> alert("Lucas para de ser gay mano")}
                             >
                                 Login
                             </button>
