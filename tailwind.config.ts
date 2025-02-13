@@ -11,6 +11,10 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        azulBg: "#10101C",
+      },
+      backgroundImage:{
+        "bg-img": "url('/torre.jpg')" 
       },
     },
   },
