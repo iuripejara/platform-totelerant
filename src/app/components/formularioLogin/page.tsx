@@ -1,4 +1,4 @@
-import { imageConfigDefault } from "next/dist/shared/lib/image-config"
+"use client"
 import {Inria_Serif} from "next/font/google"
 import { useState } from "react"
 
