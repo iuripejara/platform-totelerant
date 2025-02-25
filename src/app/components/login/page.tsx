@@ -1,5 +1,9 @@
 "use client"
 import {Aldrich} from "next/font/google"
+import FormularioLogin from "../formularioLogin/page"
+
+import { useEffect } from "react"
+import { useRouter } from "next/navigation"
 
 const aldrich = Aldrich ({
     weight:"400",
@@ -7,9 +11,17 @@ const aldrich = Aldrich ({
 })
 
 
-import FormularioLogin from "../formularioLogin/page"
-
 export default function Login() {
+    const router = useRouter();
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            router.push("/painel")
+        }
+    },[]);
+
+
     return(
         <div className="relative h-screen bg-bg-img bg-cover bg-center">
             <div className="absolute bottom-0 flex items-center justify-center   ">
