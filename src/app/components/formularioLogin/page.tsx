@@ -45,7 +45,7 @@ export default function FormularioLogin() {
                     <button
                         type="button"
                         onClick={versenha}
-                        className="absolute right-14 text-slate-50"
+                        className="absolute right-11 text-slate-50"
                     >
                         {chickSenha ?(
                             <img src="olho2.svg" alt="olho para ver a senha"  />
@@ -57,7 +57,7 @@ export default function FormularioLogin() {
                 </div>
                 <button 
                     type="button"
-                        className=" w-full bg-blue-600 text-zinc-100 font-bold py-3 roud "
+                        className=" w-full bg-blue-600 text-zinc-100 font-bold py-3 rounded-md "
                         onClick={()=> alert("Lucas para de ser gay mano")}
                 >
                     Login
