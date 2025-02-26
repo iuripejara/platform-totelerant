@@ -92,7 +92,6 @@ export default function FormularioLogin() {
                 <button 
                     type="submit"
                         className=" w-full bg-blue-600 text-zinc-100 font-bold py-3 rounded-md "
-                        onClick={()=> alert("Lucas para de ser gay mano")}
                 >
                     Login
                 </button>
