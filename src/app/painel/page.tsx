@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import SelectTimes from "@/components/selectPersona/SelectTimes";
 import SelectLocal from "@/components/selectLocal/SelectLocal";
 import LocalizacaoBotao from "@/components/localizacaoBotao/LocalizacaoBotao";
-import { Value } from "@radix-ui/react-select";
 
 export default function Painel() {
 
