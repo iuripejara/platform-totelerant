@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import SelectTimes from "@/components/selectPersona/SelectTimes";
 import SelectLocal from "@/components/selectLocal/SelectLocal";
 import LocalizacaoBotao from "@/components/localizacaoBotao/LocalizacaoBotao";
+import { Value } from "@radix-ui/react-select";
 
 export default function Painel() {
 
@@ -36,7 +37,7 @@ export default function Painel() {
     ];
 
     //estado
-    const [selectTeam,setSelectTeam] = useState([{ id: 1, value: "" }]);
+    const [selectTeam,setSelectTeam] = useState([{id:1,value:""}])
     const [selectLocal,setSelectLocal] = useState ("");
 
     //adicionar novo select de times
@@ -86,6 +87,7 @@ export default function Painel() {
                         {/* Múltiplos selects de times */}
                         { selectTeam.map((select) => (
                             <SelectTimes
+                                key={select.id}
                                 name={`team-${select.id}`}
                                 options={teams}
                                 value={select.value}// passado um valor que é valido
