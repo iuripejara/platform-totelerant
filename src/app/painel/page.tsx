@@ -48,6 +48,14 @@ export default function Painel() {
     const neweChange = ( id: number, newValue: string ) => {
         setSelectTeam(selectTeam.map(select => select.id === id ? { ...select,value:newValue}: select))
     }
+
+    // função para remover o ultimo select
+    const removeSelect = () =>{
+        if (selectTeam.length > 1) {
+            setSelectTeam(selectTeam.slice(0,-1));
+        }
+    }
+
     
     return (
         <div className="min-h-screen bg-azulBg flex flex-col items-center justify-center p-6">
@@ -70,18 +78,7 @@ export default function Painel() {
 
             <main className="w-full max-w-lg bg-zinc-800 p-6 rounded-md shadow-lg">
                 <div className="grid gap-6">
-                    <div className="flex justify-end ">
-
-                        <button
-                            onClick={newAddSelect}
-                            className=" 
-                                text-2xl text-zinc-50
-                                bg-blue-500 pb-1 px-2 rounded-[4px]
-                            "
-                        >
-                            +
-                        </button> 
-                    </div>
+                    
                     <div>  
                         {/* Múltiplos selects de times */}
                         { selectTeam.map((select) => (
@@ -92,13 +89,36 @@ export default function Painel() {
                                 value={select.value}// passado um valor que é valido
                                 onChange={(e)=> neweChange(select.id, e.target.value)} // definido o evento onChange
                                 className="
-                                    w-full p-2 rounded-md bg-zinc-900 text-lg text-zinc-100
+                                    w-full p-3 rounded-md bg-zinc-900 text-lg text-zinc-100
                                     focus:outline-none focus:ring-2 focus:ring-blue-500 
-                                    transition hover:shadow-md my-1
+                                    transition hover:shadow-md my-2
                                 "  
                             />
                             
                         ))}
+                    </div>
+                    
+                    {/* Botões de adicionar/remover time */}
+                    <div className="flex flex-col md:flex-row justify-between gap-3">
+                        <button
+                            onClick={removeSelect}
+                            className=" 
+                                flex-1 text-lg text-zinc-50 bg-red-600 px-3 py-2 rounded-md
+                                hover:bg-red-700 transition-shadow shadow-md
+                            "
+                        >
+                            Remover um da Equipe
+                        </button> 
+
+                        <button
+                            onClick={newAddSelect}
+                            className=" 
+                               flex-1 text-lg text-zinc-50 bg-blue-600 px-3 py-2 rounded-md
+                               hover:bg-blue-700 transition-shadow shadow-md
+                            "
+                        >
+                            Adicionar mais um a Equipe
+                        </button> 
                     </div>
                     
                     <hr />
@@ -109,7 +129,7 @@ export default function Painel() {
                         value={selectLocal}
                         onChange={(e) => setSelectLocal(e.target.value)}
                         className="
-                            w-full p-2 rounded-md bg-zinc-900 text-lg text-zinc-100
+                            w-full p-3 rounded-md bg-zinc-900 text-lg text-zinc-100
                             focus:outline-none focus:ring-2 focus:ring-blue-500 
                             transition hover:shadow-md
                         "

@@ -82,7 +82,7 @@ export default function FormularioLogin() {
                         className="absolute right-11 text-slate-50"
                     >
                         {chickSenha ?(
-                            <img src="olho2.svg" alt="olho para ver a senha"  />
+                            <img src="olho-2.svg" alt="olho para ver a senha" className="mt-2" />
                             )  : (
                             <img src="olho1.svg" alt="olho para ver a senha"/>
                         )}

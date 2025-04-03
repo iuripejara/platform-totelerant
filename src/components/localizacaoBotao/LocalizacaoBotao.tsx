@@ -1,4 +1,4 @@
-"use client"
+
 
 import { useState } from "react"
 
@@ -30,8 +30,8 @@ export default function LocalizacaoBotao () {
         <>
             <button
                 className="
-                    bg-blue-600 py-2 rounded-md text-zinc-100 
-                    hover:bg-blue-500 font-semibold transition
+                    bg-blue-600 py-2 px-3 rounded-md text-zinc-100 
+                    hover:bg-blue-700 font-semibold transition-shadow shadow-md
                 "
                 onClick={pegarLocalizaçao}
             >
