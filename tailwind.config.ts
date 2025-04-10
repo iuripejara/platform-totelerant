@@ -14,6 +14,7 @@ const config: Config = {
 		},
 		colors:{
 			azulBg: '#10101C',
+      azulpopup:'#0c0c15',
 		},
 	},
 },

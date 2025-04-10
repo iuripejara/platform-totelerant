@@ -1,0 +1,40 @@
+import Image from "next/image";
+import * as Dialog from "@radix-ui/react-dialog";
+
+export default function MyPopup() {
+  return (
+    <Dialog.Root>
+      <Dialog.Trigger className="px-4 py-2 bg-blue-500 text-white rounded">
+        <Image
+            src="addnovoUser.svg"
+            alt="adicionar novo user"
+            width={25}
+            height={20}
+        />
+      </Dialog.Trigger>
+        <Dialog.Portal>
+        <Dialog.Overlay className="fixed inset-0 bg-black/50" />
+        <Dialog.Content className="fixed top-[27%] left-1/2 bg-gray-800 py-6 rounded shadow transform -translate-x-1/2 -translate-y-1 text-zinc-50 w-[92%]  h-auto ">
+          <Dialog.Title className="text-lg font-bold pb-5 pl-5">Adicionar novo usuário</Dialog.Title>
+          <hr />
+          <div className="bg-azulBg w-80 h-full mx-auto mt-10 py-10 rounded-md ">
+            <div className=" flex flex-col items-center space-y-5 ">
+                <input type="email" id="Email" placeholder="Email" className="bg-azulBg w-72  py-2 pl-3 rounded-md border border-zinc-50 shadow-md" />
+                <input type="text" id="Username" placeholder="Username" className="bg-azulBg w-72  py-2 pl-3 rounded-md border border-zinc-50 shadow-md" />
+                <input type="password" id="Passoword" placeholder="Passoword" className="bg-azulBg w-72  py-2 pl-3 rounded-md border border-zinc-50 shadow-md" />
+            </div>
+            <div className="flex justify-center items-center gap-3 text-sm mt-5">
+                <button className="bg-zinc-50 py-1 px-2 text-zinc-950 rounded-md">
+                    Gerar senha  aleatório
+                </button>
+                <button className=" bg-blue-500 py-1 px-2 rounded-md">
+                    Adicionar Usuario
+                </button>
+            </div>
+          </div>
+          <Dialog.Close className="absolute top-2 right-4 mt-5">X</Dialog.Close>
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
+  );
+}
