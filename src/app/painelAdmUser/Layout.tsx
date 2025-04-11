@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import Image from "next/image";
 import { Aldrich,Nunito} from "next/font/google";
 import { useState } from "react";
@@ -15,16 +16,20 @@ const nunito = Nunito ({
     subsets: ["latin"]
 })
 
+interface layoutPainel {
+    children: React.ReactNode,
+    className:string,
+}
 
+export default function Layout({children,className}:layoutPainel) {
 
-
-export default function NavBar() {
     const [lateralNave,setLateralNave] = useState(false)
     const clicNave = () => {
         setLateralNave(!lateralNave)
     }
+
     return(
-        <>
+        <div className={className}>
             <nav className={`
                     flex justify-between items-center py-9 px-8
                     md:justify-around ${nunito.className}
@@ -32,7 +37,7 @@ export default function NavBar() {
             >
                 <button>
                     <Image 
-                        src="ambuger.svg" 
+                        src="/ambuger.svg" 
                         alt="menul ambuger" 
                         width={25} height={21}
                         onClick={clicNave}
@@ -65,18 +70,18 @@ export default function NavBar() {
                         <ul className="space-y-6" >
                             <li className="flex gap-4">
                                 <Image
-                                    src="Perfil.svg"
+                                    src="/Perfil.svg"
                                     alt="perfil"
                                     width={25}
                                     height={25}
                                     className="ml-8"
                                 /> 
-                                <Link href="painelAdm"  >Perfil</Link>
+                                <Link href="/painelAdmUser"  >Perfil</Link>
                             </li>
                            
                             <li className="flex gap-4">
                                 <Image
-                                    src="Localizacao.svg"
+                                    src="/Localizacao.svg"
                                     alt="perfil"
                                     width={25}
                                     height={25}
@@ -86,7 +91,7 @@ export default function NavBar() {
                             </li>
                             <li className="flex gap-4">
                                 <Image
-                                    src="ferramenta.svg"
+                                    src="/ferramenta.svg"
                                     alt="perfil"
                                     width={25}
                                     height={25}
@@ -97,7 +102,7 @@ export default function NavBar() {
 
                             <li className="flex gap-4">
                                 <Image
-                                    src="deligar.svg"
+                                    src="/deligar.svg"
                                     alt="perfil"
                                     width={25}
                                     height={25}
@@ -113,9 +118,10 @@ export default function NavBar() {
                 }
                 <h1 className={` text-2xl text-zinc-50 ${aldrich.className}`}>Perfil do adm</h1>
                 <button>
-                    <Image src="luaBranca.svg" alt="menul ambuger" width={32} height={32} />
+                    <Image src="/luaBranca.svg" alt="menul ambuger" width={32} height={32} />
                 </button>
             </nav>
-        </>
+            <main>{children}</main>
+        </div>
     )
 }

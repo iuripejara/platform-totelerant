@@ -1,6 +1,6 @@
 "use client"
 import {Aldrich} from "next/font/google"
-import FormularioLogin from "../formularioLogin/page"
+import FormularioLogin from "../../components/formularioLogin/page"
 
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"

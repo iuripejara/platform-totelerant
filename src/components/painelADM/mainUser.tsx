@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Aldrich, Nunito } from "next/font/google";
-import MyPopup from "./myPopup";
+import MyPopupUser from "./myPopupUser";
 
 const aldrich = Aldrich({
   weight: "400",
@@ -31,7 +31,12 @@ export default function MainUser() {
                         className="w-64  md:w-3/4 bg-zinc-900 rounded-lg text-zinc-50 pl-2 py-2"
                     />
 
-                    <MyPopup/>
+                    <MyPopupUser 
+                        imageSrc="/Avatar.svg"
+                        imageAlt="adicionar novo user"
+                        imageWidth={25}
+                        imageHeight={25}
+                    />
 
                 </div>
 

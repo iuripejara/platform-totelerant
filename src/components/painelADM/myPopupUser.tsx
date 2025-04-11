@@ -1,15 +1,25 @@
+'use client'
+
 import Image from "next/image";
 import * as Dialog from "@radix-ui/react-dialog";
 
-export default function MyPopup() {
+interface imagebotao{
+  imageSrc: string,
+  imageAlt: string,
+  imageWidth:number,
+  imageHeight:number,
+}
+
+export default function MyPopupUser({imageSrc,imageAlt,imageWidth,imageHeight }:imagebotao) {
   return (
-    <Dialog.Root>
+    <Dialog.Root >
       <Dialog.Trigger className="px-4 py-2 bg-blue-500 text-white rounded">
         <Image
-            src="addnovoUser.svg"
-            alt="adicionar novo user"
-            width={25}
-            height={20}
+          src={imageSrc}
+          alt={imageAlt}
+          width={imageWidth}
+          height={imageHeight}
+          className="flex justify-center items-center mt-1"
         />
       </Dialog.Trigger>
         <Dialog.Portal>
@@ -32,7 +42,13 @@ export default function MyPopup() {
                 </button>
             </div>
           </div>
-          <Dialog.Close className="absolute top-2 right-4 mt-5">X</Dialog.Close>
+          <Dialog.Close 
+            
+            className="absolute top-2 right-4 mt-5"
+           
+            >
+              X
+            </Dialog.Close>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
