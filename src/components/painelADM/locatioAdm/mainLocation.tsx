@@ -23,7 +23,7 @@ export default function  MainLocation() {
                 Localização
                 </h1>
 
-                <div className="max-w-4xl mx-auto rounded-lg mt-6 py-5 bg-gray-800 text-zinc-100">
+                <div className="max-w-[82rem] mx-auto rounded-lg mt-6 py-5 bg-gray-800 text-zinc-100">
                 {/* input e botão */}
                 <div className="flex flex-wrap justify-center gap-3 px-4">
                     <input
@@ -42,7 +42,7 @@ export default function  MainLocation() {
                 </div>
 
                 {/* grid dos cards */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 px-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 px-4">
                     {[
                         { Regiao: "Coimbra", Coodernada: "8781-001",  }, 
                         { Regiao: "Braga", Coodernada:"8569-002",  },
