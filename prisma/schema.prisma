@@ -1,0 +1,73 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Usuario {
+  id            Int      @id @default(autoincrement())
+  nome          String
+  email         String   @unique
+  username      String   @unique
+  senha         String
+  tipo_usuario  TipoUsuario @default(COMUM)
+  equipes       MembroEquipe[]
+  registrosImagens RegistroImagem[]
+}
+
+model LocalTrabalho {
+  id            Int      @id @default(autoincrement())
+  nome          String
+  coordenadas   String
+  regiao        String
+  descricao     String?
+  equipes       Equipe[]
+  registrosImagens RegistroImagem[]
+}
+
+model Equipe {
+  id              Int      @id @default(autoincrement())
+  nome            String
+  local_trabalho_id Int
+  local_trabalho  LocalTrabalho @relation(fields: [local_trabalho_id], references: [id])
+  membros         MembroEquipe[]
+}
+
+model MembroEquipe {
+  usuario_id      Int
+  equipe_id       Int
+  usuario         Usuario @relation(fields: [usuario_id], references: [id])
+  equipe          Equipe  @relation(fields: [equipe_id], references: [id])
+
+  @@id([usuario_id, equipe_id])
+}
+
+model RegistroImagem {
+  id              Int      @id @default(autoincrement())
+  usuario_id      Int
+  local_trabalho_id Int
+  url_imagem      String
+  descricao       String?
+  horario_registro DateTime @default(now())
+  latitude        Decimal? @db.Decimal(9,6)
+  longitude       Decimal? @db.Decimal(9,6)
+
+  usuario         Usuario @relation(fields: [usuario_id], references: [id])
+  local_trabalho  LocalTrabalho @relation(fields: [local_trabalho_id], references: [id])
+}
+
+enum TipoUsuario {
+  ADMIN
+  COMUM
+}
