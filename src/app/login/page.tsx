@@ -32,11 +32,11 @@ export default function Login() {
                         md:rounded-md
                         "
                     >
-                    <header className={`text-center text-3xl font-bold mb-6 ${aldrich.className}`}>Tolerantlevel</header>
+                    <header className={`text-center text-3xl font-bold mb-6 ${aldrich.className}`}>TolerantLevel</header>
                     <div>
                         <FormularioLogin/>
                         <footer className=" text-center text-[11px] md:text-[15px] mt-6 flex justify-between">
-                            <span>©Todos os direitos reservado.Tolerantlevel 2025</span>
+                            <span>©Todos os direitos reservado.TolerantLevel 2025</span>
                             <span><a href="https://github.com/iuripejara">PrestesDev</a></span>
                         </footer>
                     </div>
