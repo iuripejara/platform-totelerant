@@ -1,4 +1,35 @@
+/* Seu arquivo CSS global (por exemplo, app/globals.css ou styles/globals.css) */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* --- CSS Personalizado para Corrigir o Fundo do Preenchimento Automático --- */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px transparent inset !important;
+    -webkit-text-fill-color: inherit !important; /* Mantém a cor do texto do Tailwind */
+    background-color: transparent !important; /* Garante que o fundo seja transparente */
+    color: inherit !important; /* Mantém a cor do texto do Tailwind */
+}
+
+input:-moz-autofill,
+input:-moz-autofill:hover,
+input:-moz-autofill:focus,
+input:-moz-autofill:active {
+    background-color: transparent !important;
+    color: inherit !important;
+}
+
+input:autofill,
+input:autofill:hover,
+input:autofill:focus,
+input:autofill:active {
+    background-color: transparent !important;
+    color: inherit !important;
+}
+/* --- Fim da Correção de Preenchimento Automático --- */
+
+/* Quaisquer outros estilos globais que você possa ter */
