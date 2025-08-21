@@ -15,7 +15,7 @@ interface imagebotaoProps{
 export default function MyPopupLocation({imageSrc,imageAlt,imageWidth,imageHeight,onCreated}:imagebotaoProps) {
   
   const [ coordenadas,setCoordenadas] = useState("");
-  const [regiao,setregiao] = useState("");
+  const [regiao,setRegiao] = useState("");
   const [open,setopen] = useState(false);
   
   //subimit formulario 
@@ -34,7 +34,7 @@ export default function MyPopupLocation({imageSrc,imageAlt,imageWidth,imageHeigh
       const novo = await res.json();
       onCreated?.(novo); // atualiza a lista se o pai passar o callback
       setCoordenadas("");
-      setregiao("");
+      setRegiao("");
       setopen(false); // fecha o dialog
     }
   }
@@ -74,7 +74,7 @@ export default function MyPopupLocation({imageSrc,imageAlt,imageWidth,imageHeigh
                 id="Regiao"
                 placeholder="Regiao"
                 value={regiao}
-                onChange={(e) => setregiao(e.target.value)}
+                onChange={(e) => setRegiao(e.target.value)}
                 className="
                   bg-azulBg w-72 md:w-3/5  py-2 pl-3 rounded-md border
                   border-zinc-50 shadow-md"

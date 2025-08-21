@@ -1,6 +1,9 @@
+"use client"
 import Image from "next/image";
 import { Aldrich, Nunito } from "next/font/google";
 import MyPopupUser from "./myPopupUser";
+import { useEffect, useState } from "react";
+
 
 const aldrich = Aldrich({
   weight: "400",
@@ -12,7 +15,24 @@ const nunito = Nunito({
   subsets: ["latin"],
 });
 
+type Usuario = {
+    id: number;
+    nome: string;
+    username: string;
+    senha: string;
+    email: string;
+}
+
 export default function MainUser() {
+
+    const [ usuario, setUsuario ] =  useState<Usuario[]>([]);
+
+     useEffect(()=> {
+            fetch("/api/vewUser")
+            .then((res) => res.json())
+            .then((data) => setUsuario(data));
+        },[]);
+
     return(
         <>
             <main className="mt-5 px-4 sm:px-8">
@@ -42,24 +62,21 @@ export default function MainUser() {
 
                 {/* grid dos cards */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 px-4">
-                    {[
-                        { nome: "Iuri", username: "Iuri0909", senha: "Iuriteste" }, 
-                        { nome: "Felipe", username: "Felipe0909", senha: "545454" },
-                        { nome: "lucas", username: "lucas112", senha:"56565"}].map((user, i) => (
-                    <div
-                        key={i}
-                        className={`w-full max-w-sm mx-auto rounded-lg py-5 bg-azulBg text-zinc-100 ${nunito.className}`}
-                    >
-                        <h1 className="text-center text-sm">{user.nome}</h1>
+                    {usuario.map((Usuario)=>(
+                        <div
+                            key={Usuario.id}
+                            className={`w-full max-w-sm mx-auto rounded-lg py-5 bg-azulBg text-zinc-100 ${nunito.className}`}
+                        >
+                        <h1 className="text-center text-sm uppercase">{Usuario.nome}</h1>
 
                         <div className="flex gap-4 ml-5 my-4">
-                        <label htmlFor="Username">Username:</label>
-                        <p className="border-b w-1/2">{user.username}</p>
+                            <label htmlFor="Username">Username:</label>
+                            <p className="border-b w-1/2 uppercase">{Usuario.username}</p>
                         </div>
 
                         <div className="flex gap-4 ml-5 my-4">
-                        <label htmlFor="Password">Password:</label>
-                        <p className="border-b w-1/2">{user.senha}</p>
+                            <label htmlFor="Password">Password:</label>
+                            <p className="border-b w-1/2">{Usuario.senha}</p>
                         </div>
 
                         <div className="flex justify-center space-x-2 pt-3">
