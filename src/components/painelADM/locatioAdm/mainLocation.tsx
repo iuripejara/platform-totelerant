@@ -1,7 +1,8 @@
+"use client";
 import { Aldrich, Nunito } from "next/font/google";
 import Image from "next/image";
 import MyPopupLocation from "./myPopupLocation";
-
+import { useEffect, useState } from "react";
 
 const aldrich = Aldrich({
   weight: "400",
@@ -13,7 +14,25 @@ const nunito = Nunito({
   subsets: ["latin"],
 });
 
+type Location = {
+    id: number;
+    nome: string;
+    coordenadas: string;
+    regiao: string;
+    descricao:string;
+};
+
+
 export default function  MainLocation() {
+
+    const [location,setLocation]  = useState<Location[]>([]);
+
+    useEffect(()=> {
+        fetch("/api/Locatioin")
+        .then((res) => res.json())
+        .then((data) => setLocation(data));
+    },[]);
+
     return(
         <>
             <main className="mt-5 px-4 sm:px-8">
@@ -32,7 +51,7 @@ export default function  MainLocation() {
                         className="w-64  md:w-3/4 bg-zinc-900 rounded-lg text-zinc-50 pl-2 py-2"
                     />
 
-                    <MyPopupLocation 
+                    <MyPopupLocation
                         imageSrc="/Localizacao.svg"
                         imageAlt="adicionar nova localização"
                         imageWidth={25}
@@ -43,23 +62,23 @@ export default function  MainLocation() {
 
                 {/* grid dos cards */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 px-4">
-                    {[
-                        { Regiao: "Coimbra", Coodernada: "8781-001",  }, 
-                        { Regiao: "Braga", Coodernada:"8569-002",  },
-                        { Regiao: "Porto", Coodernada: "6262", }].map((user, i) => (
+                    {location.map((localTrabalho)=> (
+                        // { Regiao: "Coimbra", Coodernada: "8781-001",  }, 
+                        // { Regiao: "Braga", Coodernada:"8569-002",  },
+                        // { Regiao: "Porto", Coodernada: "6262", }].map((user, i) => (
                         <div
-                            key={i}
+                            key={localTrabalho.id}
                             className={`w-full max-w-sm mx-auto rounded-lg py-5 bg-azulBg text-zinc-100 ${nunito.className}`}
                         >
-                            <h1 className="text-center text-sm">{user.Regiao}</h1>
+                            <h1 className="text-center text-sm uppercase">{localTrabalho.nome}</h1>
 
                             <div className="flex gap-4 ml-5 my-4">
                                 <label htmlFor="Password">Coodernada:</label>
-                                <p className="border-b w-1/2">{user.Coodernada}</p>
+                                <p className="border-b w-1/2">{localTrabalho.coordenadas}</p>
                             </div>
                             <div className="flex gap-4 ml-5 my-4">
                                 <label htmlFor="Username">Região:</label>
-                                <p className="border-b w-1/2">{user.Regiao}</p>
+                                <p className="border-b w-1/2 uppercase">{localTrabalho.regiao}</p>
                             </div>
 
                             <div className="flex justify-center space-x-2 pt-3">
