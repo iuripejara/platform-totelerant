@@ -32,7 +32,7 @@ export async function POST(req:Request) {
             },
         });
         return NextResponse.json(novoUsuario)
-    } catch (error) {
+    } catch {
         return NextResponse.json({ error : "Erro ao criar local"}, { status: 500 });
     }
 }
