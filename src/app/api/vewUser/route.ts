@@ -11,7 +11,7 @@ export async function GET() {
             orderBy: { id: "asc" }
         });
         return NextResponse.json(user)
-    } catch (error) {
+    } catch{
         return NextResponse.json({ error: "Error ao buscar dado" }, { status: 500 })
     }
 }

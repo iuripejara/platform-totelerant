@@ -10,7 +10,7 @@ export async function GET() {
             orderBy: { id: "desc" },
         });
         return NextResponse.json(locais);
-    }catch(error){
+    }catch{
         return NextResponse.json({error :  "Error ao buscar dado"},{status: 500})
     }
 }
