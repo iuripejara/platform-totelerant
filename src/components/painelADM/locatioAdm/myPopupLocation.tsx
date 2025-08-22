@@ -3,14 +3,14 @@
 import Image from "next/image";
 import * as Dialog from "@radix-ui/react-dialog";
 import { useState } from "react";
-import { LocalTrabalho } from "@prisma/client";
+
 
 interface imagebotaoProps{
   imageSrc: string,
   imageAlt: string,
   imageWidth:number,
   imageHeight:number,
-  onCreated?: (local: LocalTrabalho) => void; // callback para atualizar a lista na página
+  onCreated?: (local: Location) => void; // callback para atualizar a lista na página
 }
 
 export default function MyPopupLocation({imageSrc,imageAlt,imageWidth,imageHeight,onCreated}:imagebotaoProps) {
