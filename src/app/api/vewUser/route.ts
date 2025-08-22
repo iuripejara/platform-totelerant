@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "../../../../generated/prisma";
+import { PrismaClient } from "@prisma/client";
 
+const prisma = new PrismaClient();
 
-const prisma = new PrismaClient()
 
 //Rota Get para mostrar Usuarios
 export async function GET() {
