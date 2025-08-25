@@ -3,16 +3,17 @@
 import Image from "next/image";
 import * as Dialog from "@radix-ui/react-dialog";
 import { useState } from "react";
-import { Usuario } from "@prisma/client";
+import { Username } from "./mainUser"
 
-
-interface imagebotaoProps{
-  imageSrc: string,
-  imageAlt: string,
-  imageWidth:number,
-  imageHeight:number,
-  onCreated?: (user: Usuario) => void;
+interface imagebotaoProps {
+  imageSrc: string;
+  imageAlt: string;
+  imageWidth: number;
+  imageHeight: number;
+  onCreated?: (user: Username) => void;
 }
+
+
 
 export default function MyPopupUser({imageSrc,imageAlt,imageWidth,imageHeight,onCreated }:imagebotaoProps) {
   
