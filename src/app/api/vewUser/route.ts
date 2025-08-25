@@ -1,20 +1,21 @@
 import { NextResponse } from "next/server";
-import { PrismaClient, Usuario } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 
 //Rota Get para mostrar Usuarios
 export async function GET() {
-    try {
-        const users: Usuario[] = await prisma.usuario.findMany({
-            orderBy: { id: "asc" }
-        });
-        return NextResponse.json(users)
-    } catch{
-        return NextResponse.json({ error: "Error ao buscar dado" }, { status: 500 })
-    }
+  try {
+    const users = await prisma.usuario.findMany({
+      orderBy: { id: "asc" }
+    });
+    return NextResponse.json(users);
+  } catch {
+    return NextResponse.json({ error: "Erro ao buscar dado" }, { status: 500 });
+  }
 }
+
 
 
 // Rot POST para add um Usuario
