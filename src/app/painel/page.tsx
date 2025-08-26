@@ -1,22 +1,12 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import SelectTimes from "@/components/selectPersona/SelectTimes";
 import SelectLocal from "@/components/selectLocal/SelectLocal";
 import LocalizacaoBotao from "@/components/localizacaoBotao/LocalizacaoBotao";
 
 export default function Painel() {
-
     const router = useRouter();
-
-    useEffect(() => {
-        const token = localStorage.getItem("token");
-        if (!token) {
-            router.push("/");
-        }
-    }, [router]);
-
-    
 
     // Para saber dos times  
     const teams = [
@@ -27,7 +17,6 @@ export default function Painel() {
         {label: "johnatan", value:"johnatan"}
     ];
 
-    // para os locais
     const torres = [
         {label: "Porto", value:"Porto"},
         {label: "Coimbra", value:"Coimbra"},
@@ -35,28 +24,23 @@ export default function Painel() {
         {label: "Braga", value:"Braga"},
     ];
 
-    //estado
     const [selectTeam,setSelectTeam] = useState([{id:1,value:""}])
     const [selectLocal,setSelectLocal] = useState ("");
 
-    //adicionar novo select de times
     const newAddSelect = () => {
         setSelectTeam([...selectTeam,{id: selectTeam.length + 1 ,value:""}])
     };
 
-    //pegado valor de um select  especifico
     const neweChange = ( id: number, newValue: string ) => {
         setSelectTeam(selectTeam.map(select => select.id === id ? { ...select,value:newValue}: select))
     }
 
-    // função para remover o ultimo select
     const removeSelect = () =>{
         if (selectTeam.length > 1) {
             setSelectTeam(selectTeam.slice(0,-1));
         }
     }
 
-    
     return (
         <div className="min-h-screen bg-azulBg flex flex-col items-center justify-center p-6">
             <div className="flex items-center gap-4">
@@ -66,7 +50,6 @@ export default function Painel() {
                 
                 <button
                     onClick={() => {
-                        localStorage.removeItem("token");
                         document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
                         router.push("/");
                     }}
@@ -80,25 +63,22 @@ export default function Painel() {
                 <div className="grid gap-6">
                     
                     <div>  
-                        {/* Múltiplos selects de times */}
                         { selectTeam.map((select) => (
                             <SelectTimes
                                 key={select.id}
                                 name={`team-${select.id}`}
                                 options={teams}
-                                value={select.value}// passado um valor que é valido
-                                onChange={(e)=> neweChange(select.id, e.target.value)} // definido o evento onChange
+                                value={select.value}
+                                onChange={(e)=> neweChange(select.id, e.target.value)}
                                 className="
                                     w-full p-3 rounded-md bg-zinc-900 text-lg text-zinc-100
                                     focus:outline-none focus:ring-2 focus:ring-blue-500 
                                     transition hover:shadow-md my-2
                                 "  
                             />
-                            
                         ))}
                     </div>
                     
-                    {/* Botões de adicionar/remover time */}
                     <div className="flex flex-col md:flex-row justify-between gap-3">
                         <button
                             onClick={removeSelect}
@@ -135,7 +115,6 @@ export default function Painel() {
                         "
                     />
 
-                    {/* Botão de Início */}
                     <LocalizacaoBotao/>
                 </div>
             </main>

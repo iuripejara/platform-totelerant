@@ -16,8 +16,6 @@ export async function GET() {
   }
 }
 
-
-
 // Rot POST para add um Usuario
 
 export async function POST(req:Request) {
@@ -30,6 +28,7 @@ export async function POST(req:Request) {
                 username: body.username,
                 senha:body.senha,
                 email: body.email,
+                tipo_usuario : body.tipo_usuario || "COMUN"
             },
         });
         return NextResponse.json(novoUsuario)

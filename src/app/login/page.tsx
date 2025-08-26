@@ -2,25 +2,12 @@
 import {Aldrich} from "next/font/google"
 import FormularioLogin from "../../components/formularioLogin/page"
 
-import { useEffect } from "react"
-import { useRouter } from "next/navigation"
-
 const aldrich = Aldrich ({
     weight:"400",
     subsets: ["latin"],
 })
 
-
 export default function Login() {
-    const router = useRouter();
-
-    useEffect(() => {
-        const token = localStorage.getItem("token");
-        if (token) {
-            router.push("/painel")
-        }
-    },[]);
-
 
     return(
         <div className="relative h-screen bg-bg-img bg-cover bg-center">

@@ -1,25 +1,40 @@
+import { PrismaClient, } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
+import jwt from "jsonwebtoken"
 
-const logUser = {
-    username : "teste",
-    password : "1234567890",
-    token: "fake-jwt-token"
-};
+const prisma = new PrismaClient()
+const SECRET = process.env.CHAVE_SECRETA as string
 
 export async function POST(req:NextRequest) {
-    const { username, password} = await req.json();
+    try {
+        const { username, password } = await req.json();
 
-    if (username === logUser.username && password === logUser.password) {
-        const response = NextResponse.json({ message: "logim bem-sucedido!", token: logUser.token })
-    
-         // Define o token no cookie para mais segurança
-        response.cookies.set("token", logUser.token, {
+        const user = await prisma.usuario.findUnique({
+            where: { username },
+        })
+        if (!user || user.senha !== password) {
+            return NextResponse.json({ message: "Credenciais invalida"}, { status : 401 })
+        }
+
+        const token = jwt.sign(
+            { id : user.id, tipo_usuario: user.tipo_usuario },
+            SECRET,
+            { expiresIn: "1d" }
+        );
+
+        const response = NextResponse.json({
+            message: "Login bem sucedido",
+            token,
+        });
+        response.cookies.set("token", token,{ 
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
-            maxAge: 60 * 60 * 24, // 1 dia
-            path: "/",
+            maxAge: 60 * 60 * 24,
+            path: "/"
         });
-        return response
+        return response;
+    } catch (error) {
+        console.error(error)
+        return NextResponse.json({ message: "Error no servidor"}, { status: 500  })
     }
-    return NextResponse.json({ message: "Credenciais inválidas" }, { status: 401 });
 }

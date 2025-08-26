@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   formatDetection: {
     telephone: false, // Evita que números de telefone sejam clicáveis automaticamente
   },
-  themeColor: '#000000', // Cor do tema da barra de status do navegador (deve ser a mesma do manifest)
+  
 };
 
 // Defina o viewport para garantir que a aplicação se ajuste bem em dispositivos móveis
@@ -27,6 +27,7 @@ export const viewport: Viewport = {
   maximumScale: 1, // Evita o zoom em dispositivos móveis
   userScalable: false, // Desabilita o zoom do usuário
   viewportFit: 'cover', // Usa toda a área disponível em dispositivos com entalhes (notches)
+  themeColor: '#000000', // ✅ aqui é o lugar certo
 };
 
 
