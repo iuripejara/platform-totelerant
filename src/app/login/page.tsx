@@ -1,7 +1,7 @@
 "use client"
 import {Aldrich} from "next/font/google"
 import FormularioLogin from "../../components/formularioLogin/page"
-
+//
 const aldrich = Aldrich ({
     weight:"400",
     subsets: ["latin"],
