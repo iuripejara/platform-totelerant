@@ -1,4 +1,3 @@
-// app/api/localtrabalho/route.ts
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { createClient } from "@supabase/supabase-js";
@@ -25,7 +24,7 @@ export async function POST(req: Request) {
         coordenadas: "0,0",
         regiao: "Indefinida",
         descricao,
-        linha_vida: linhaVida, // <-- adiciona iss
+        linha_vida: linhaVida,
       },
     });
 
@@ -37,12 +36,12 @@ export async function POST(req: Request) {
       const arrayBuffer = await foto.arrayBuffer();
       const buffer = Buffer.from(arrayBuffer);
 
-      const {  error } = await supabase.storage
+      const { error } = await supabase.storage
         .from("torres")
         .upload(`local-${local.id}/${Date.now()}-${foto.name}`, buffer, {
-        contentType: foto.type,
-        upsert: true,
-      });
+          contentType: foto.type,
+          upsert: true,
+        });
 
       if (error) throw error;
 
@@ -64,19 +63,18 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ local, fotos: urls, linhaVida });
   } catch (error: unknown) {
-  console.error("Erro no POST /localtrabalho:", error);
+    console.error("Erro no POST /localtrabalho:", error);
 
-  if (error instanceof Error) {
+    if (error instanceof Error) {
+      return NextResponse.json(
+        { error: error.message },
+        { status: 500 }
+      );
+    }
+
     return NextResponse.json(
-      { error: error.message },
+      { error: "Erro ao salvar dados" },
       { status: 500 }
     );
   }
-
-  return NextResponse.json(
-    { error: "Erro ao salvar dados" },
-    { status: 500 }
-  );
-}
-
 }
