@@ -37,7 +37,7 @@ export async function POST(req: Request) {
       const arrayBuffer = await foto.arrayBuffer();
       const buffer = Buffer.from(arrayBuffer);
 
-      const { data, error } = await supabase.storage
+      const {  error } = await supabase.storage
         .from("torres")
         .upload(`local-${local.id}/${Date.now()}-${foto.name}`, buffer, {
         contentType: foto.type,
@@ -63,11 +63,20 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json({ local, fotos: urls, linhaVida });
-  } catch (error: any) {
+  } catch (error: unknown) {
   console.error("Erro no POST /localtrabalho:", error);
+
+  if (error instanceof Error) {
+    return NextResponse.json(
+      { error: error.message },
+      { status: 500 }
+    );
+  }
+
   return NextResponse.json(
-    { error: error.message || "Erro ao salvar dados" },
+    { error: "Erro ao salvar dados" },
     { status: 500 }
   );
 }
+
 }
