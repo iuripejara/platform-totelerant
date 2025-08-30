@@ -1,3 +1,4 @@
+'use client'
 import Layout from "@/app/painelAdmUser/Layout";
 import MainUser from "@/components/painelADM/mainUser";
 

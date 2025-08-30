@@ -31,6 +31,7 @@ model LocalTrabalho {
   coordenadas   String
   regiao        String
   descricao     String?
+  linha_vida    Boolean  @default(false)
   equipes       Equipe[]
   registrosImagens RegistroImagem[]
 }

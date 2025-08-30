@@ -3,8 +3,7 @@ import Image from "next/image";
 import { Aldrich,Nunito} from "next/font/google";
 import { useState } from "react";
 import Link from "next/link";
-
-
+import LogoutButton from "../logoutButton/LogoutButton";
 
 const aldrich = Aldrich ({
     weight: "400",
@@ -14,9 +13,6 @@ const nunito = Nunito ({
     weight: "600",
     subsets: ["latin"]
 })
-
-
-
 
 export default function NavBar() {
     const [lateralNave,setLateralNave] = useState(false)
@@ -94,8 +90,8 @@ export default function NavBar() {
                                 /> 
                                 <Link href="#"  >Trabalhos</Link>
                             </li>
-
-                            <li className="flex gap-4">
+                                {/* botao logout */}
+                            <LogoutButton className="flex gap-4">
                                 <Image
                                     src="deligar.svg"
                                     alt="perfil"
@@ -103,10 +99,11 @@ export default function NavBar() {
                                     height={25}
                                     className="ml-5"
                                 /> 
-                                <Link href="#" className="text-red-600 text-xl"  >Sair</Link>
-                            </li>
+                            </LogoutButton>
+
+                            
                         </ul>
-                                           
+                                             
                     </div>
                 )
 

@@ -1,9 +1,10 @@
-"use client";
+'use client'
 import React from "react";
 import Image from "next/image";
 import { Aldrich,Nunito} from "next/font/google";
 import { useState } from "react";
 import Link from "next/link";
+import LogoutButton from "@/components/logoutButton/LogoutButton";
 
 
 
@@ -68,7 +69,7 @@ export default function Layout({children,className}:layoutPainel) {
                         <h1 className=" text-xl ml-5 my-5">Gereciamento</h1>
 
                         <ul className="space-y-6" >
-                            <li className="flex gap-4">
+                            <li className="flex items-center gap-2 ml-5">
                                 <Image
                                     src="/Perfil.svg"
                                     alt="perfil"
@@ -99,17 +100,20 @@ export default function Layout({children,className}:layoutPainel) {
                                 /> 
                                 <Link href="#"  >Trabalhos</Link>
                             </li>
-
-                            <li className="flex gap-4">
+                            <LogoutButton 
+                                className="flex items-center gap-2 ml-5"
+                                onLogout={() => setLateralNave(false)}
+                            >
                                 <Image
                                     src="/deligar.svg"
                                     alt="perfil"
                                     width={25}
                                     height={25}
                                     className="ml-5"
-                                /> 
-                                <Link href="#" className="text-red-600 text-xl"  >Sair</Link>
-                            </li>
+                                />
+                                <span className="text-red-600 text-lg">Sair</span>
+                            </LogoutButton>
+                           
                         </ul>
                                            
                     </div>

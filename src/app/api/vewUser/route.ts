@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, TipoUsuario } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -28,7 +28,8 @@ export async function POST(req:Request) {
                 username: body.username,
                 senha:body.senha,
                 email: body.email,
-                tipo_usuario : body.tipo_usuario || "COMUN"
+                tipo_usuario: 
+                  body.tipo_usuario === "ADMIN" ? TipoUsuario.ADMIN : TipoUsuario.COMUM
             },
         });
         return NextResponse.json(novoUsuario)

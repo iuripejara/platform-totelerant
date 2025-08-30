@@ -114,7 +114,6 @@ export default function Painel() {
                             transition hover:shadow-md
                         "
                     />
-
                     <LocalizacaoBotao/>
                 </div>
             </main>

@@ -20,8 +20,25 @@ export default function MyPopupUser({imageSrc,imageAlt,imageWidth,imageHeight,on
   const [username,setUsername] = useState("")
   const [email,setEmail] = useState("")
   const [senha,setSenha] = useState("")
+  const [tipoUsuario,setTipodeUsuario] = useState<"ADMIN" | "COMUM">("COMUM")
   const [open,setopen] = useState(false);
+  const [chickSenha, setChickSenha] = useState(false);
+  
+  const versenha = () => {
+    setChickSenha(!chickSenha);
+  };
 
+  function generete(size = 10) {
+        const character ="1234567890qwertyuiop[asdfghjklç~]zxcvbnmQWERTYUIOP{ASDFGHJKLÇ^}ZXCVBNM"
+        
+        let newPassword = ""
+        for (let i = 0; i < size; i++) {
+            const position  = Math.floor(Math.random() *  character.length)
+            newPassword += character[position]
+        }
+        return(newPassword)
+
+    }
 
   //subimit formulario 
   async function handleSubmit() {
@@ -34,6 +51,7 @@ export default function MyPopupUser({imageSrc,imageAlt,imageWidth,imageHeight,on
         senha,
         username,
         email,
+        tipo_usuario:tipoUsuario
       }),
     })
     if (res.ok) {
@@ -43,6 +61,7 @@ export default function MyPopupUser({imageSrc,imageAlt,imageWidth,imageHeight,on
       setSenha("");
       setEmail("");
       setopen(false); // fecha o dialog
+      setTipodeUsuario("COMUM");
     }
   }
 
@@ -88,20 +107,50 @@ export default function MyPopupUser({imageSrc,imageAlt,imageWidth,imageHeight,on
                   border-zinc-50 shadow-md
                 " 
               />
-              <input 
-                type="password"
-                id="Passoword"
-                placeholder="Passoword"
-                value={senha}
-                onChange={(e) => setSenha(e.target.value)}
+              <div className="relative w-72 md:w-3/5">
+                <input 
+                  type={chickSenha ? "text" : "password"}
+                  id="Password"
+                  placeholder="Password"
+                  value={senha}
+                  onChange={(e) => setSenha(e.target.value)}
+                  className="
+                    bg-azulBg w-full py-2 pl-3 pr-10 rounded-md border
+                    border-zinc-50 shadow-md
+                  " 
+                />
+                <button
+                  type="button"
+                  onClick={versenha}
+                  className="absolute right-3 top-1/2 -translate-y-1/2"
+                >
+                  {chickSenha ? (
+                    <img src="olho-2.svg" alt="ocultar senha" />
+                  ) : (
+                    <img src="olho1.svg" alt="mostrar senha" />
+                  )}
+                </button>
+              </div>
+
+              
+              {/* Select para ADMIN ou COMUN */}
+              <select 
+                value={tipoUsuario}
+                onChange={(e) => setTipodeUsuario(e.target.value as "ADMIN" | "COMUM")}
                 className="
                   bg-azulBg w-72 md:w-3/5  py-2 pl-3 rounded-md border
                   border-zinc-50 shadow-md
                 " 
-              />
+              >
+                <option>Usuário COMUM</option>
+                <option>Usuário ADMIN</option>
+
+              </select>
             </div>
             <div className="flex justify-center items-center gap-3 text-sm mt-5">
                 <button
+                  type="button"
+                  onClick={()=>{setSenha(generete(10))}}
                   className="
                     bg-zinc-50 py-1 px-2 md:py-2  md:px-14 text-zinc-950 rounded-md
                     "
